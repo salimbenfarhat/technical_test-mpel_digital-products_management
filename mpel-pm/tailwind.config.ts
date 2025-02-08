@@ -11,6 +11,14 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "var(--primary)", // Rose brillant pour les boutons
+        secondary: "var(--secondary)", // Rouge brillant pour accentuer
+        textPrimary: "var(--text-primary)", // Noir brillant pour les titres
+        textSecondary: "var(--text-secondary)", // Noir plus clair pour les paragraphes
+      },
+      fontFamily: {
+        title: ["var(--font-title)", "serif"],
+        body: ["var(--font-body)", "sans-serif"],
       },
     },
   },
