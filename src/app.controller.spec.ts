@@ -15,8 +15,10 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return a welcome message', () => {
+      expect(appController.getWelcomeMessage()).toEqual({
+        message: 'Bienvenue sur l’API de gestion des produits ! 🚀',
+      });
     });
   });
 });
