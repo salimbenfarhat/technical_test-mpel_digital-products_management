@@ -5,6 +5,7 @@ import {
   Put,
   Delete,
   Body,
+  Query,
   Param,
   UsePipes,
   ValidationPipe,
@@ -24,12 +25,11 @@ export class ProductController {
     return this.productService.create(productData);
   }
 
-  // 🔵 Récupérer tous les produits (GET /products)
+  // 🔵 Récupérer tous les produits avec pagination (GET /products?page=1&limit=10)
   @Get()
-  findAll() {
-    return this.productService.findAll();
+  async findAll(@Query('page') page = 1, @Query('limit') limit = 10) {
+    return this.productService.findAll(Number(page), Number(limit));
   }
-
   // 🟡 Récupérer un produit par ID (GET /products/:id)
   @Get(':id')
   findOne(@Param('id') id: string) {
