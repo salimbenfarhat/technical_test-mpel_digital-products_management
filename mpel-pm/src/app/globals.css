@@ -1,21 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+  --background: #FFF8E7; /* Fond blanc crème */
+  --foreground: #ffffff; /* Fond général */
+  --primary: #E91E63; /* Rose brillant */
+  --secondary: #D32F2F; /* Rouge brillant */
+  --text-primary: #1A1A1A; /* Noir brillant */
+  --text-secondary: #333333; /* Noir plus clair */
+  --font-title: "Playfair Display";
+  --font-body: "Poppins";
+}
+
+/* 🌙 Mode sombre */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1E1E1E; /* Fond noir */
+    --foreground: #121212; /* Fond plus foncé */
+    --primary: #FF4081; /* Rose plus vif */
+    --secondary: #F44336; /* Rouge accentué */
+    --text-primary: #FFFFFF; /* Texte blanc */
+    --text-secondary: #BBBBBB; /* Texte gris clair */
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Appliquer les styles globaux */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-textPrimary font-body;
 }
