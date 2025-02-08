@@ -6,9 +6,12 @@ import {
   Delete,
   Body,
   Param,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.schema';
+import { CreateProductDto } from './dto/create-product.dto';
 
 @Controller('products')
 export class ProductController {
@@ -16,7 +19,8 @@ export class ProductController {
 
   // 🟢 Créer un produit (POST /products)
   @Post()
-  create(@Body() productData: Partial<Product>) {
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  create(@Body() productData: CreateProductDto) {
     return this.productService.create(productData);
   }
 
