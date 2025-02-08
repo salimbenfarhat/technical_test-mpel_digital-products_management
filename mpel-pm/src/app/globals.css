@@ -2,16 +2,17 @@
 
 :root {
   --background: #FFF8E7; /* Fond blanc crème */
-  --foreground: #ffffff; /* Fond général */
+  --foreground: #ffffff; /* Blanc pur */
   --primary: #E91E63; /* Rose brillant */
   --secondary: #D32F2F; /* Rouge brillant */
-  --text-primary: #1A1A1A; /* Noir brillant */
-  --text-secondary: #333333; /* Noir plus clair */
+  --text-primary: #1A1A1A; /* Noir profond */
+  --text-secondary: #333333; /* Gris moyen */
+
   --font-title: "Playfair Display";
   --font-body: "Poppins";
 }
 
-/* 🌙 Mode sombre */
+/* Mode sombre */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1E1E1E; /* Fond noir */
@@ -27,7 +28,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Appliquer les styles globaux */
+/* Application des styles globaux avec @apply */
 body {
   @apply bg-background text-textPrimary font-body;
 }
