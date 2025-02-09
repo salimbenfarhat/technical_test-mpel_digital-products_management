@@ -1,14 +1,9 @@
 // src/app/products/components/FeaturedProducts.tsx
 import ProductCard from '@/components/ProductCard';
+import { Product } from '@/types/product';
 
 interface FeaturedProductsProps {
-  products: {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }[];
+  products: Product[];
   title: string; // Titre du bloc (ex. "Top Produits" ou "Produits recommandés")
 }
 
@@ -23,7 +18,7 @@ const FeaturedProducts = ({ products, title }: FeaturedProductsProps) => {
       {/* Grille des produits */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.slice(0, 3).map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>
