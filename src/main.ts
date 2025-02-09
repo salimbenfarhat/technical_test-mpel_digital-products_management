@@ -5,6 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   // 📌 Configuration Swagger
   const config = new DocumentBuilder()
     .setTitle('MPEL PM - API Produits')
