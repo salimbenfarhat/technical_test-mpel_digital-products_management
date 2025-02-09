@@ -1,25 +1,31 @@
 // src/components/ProductCard.tsx
 import Image from 'next/image';
+import { Product } from '@/types/product';
 import Link from 'next/link';
 
 interface ProductProps {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
+  product: Product; 
 }
 
-export default function ProductCard({ id, name, description, price, image }: ProductProps) {
+const ProductCard = ({ product }: ProductProps) => {
   return (
-    <div className="border rounded-lg shadow-md p-4 bg-white">
-      <Image src={image} alt={name} width={150} height={150} className="w-full h-40 object-cover rounded-md" />
-      <h2 className="text-xl font-title mt-2">{name}</h2>
-      <p className="text-sm text-textSecondary">{description}</p>
-      <p className="text-lg font-bold text-primary mt-2">{price.toFixed(2)}€</p>
-      <Link href={`/products/${id}`} className="block mt-3 bg-primary text-white text-center py-2 rounded-lg hover:bg-secondary">
+    <div className="bg-white shadow-md rounded-lg p-4">
+      <Image
+        src={product.image || '/default-product.jpg'}
+        alt={product.name}
+        width={150}
+        height={150}
+        className="w-full h-40 object-cover rounded-md"
+        priority
+      />
+      <h3 className="text-lg font-title text-textPrimary mt-2">{product.name}</h3>
+      <p className="text-textSecondary text-sm">{product.description}</p>
+      <p className="text-primary font-semibold mt-2">{product.price}€</p>
+      <Link href={`/products/${product._id}`} className="block mt-3 bg-primary text-white text-center py-2 rounded-lg hover:bg-secondary">
         Voir le produit
       </Link>
     </div>
   );
-}
+};
+
+export default ProductCard;
