@@ -15,7 +15,11 @@ export const api = axios.create({
 export const testApiConnection = async (): Promise<boolean> => {
   try {
     // Effectue une requête simple (GET) vers l'API
-    const response = await api.get('/');
+    const page = 1; // or any default value
+    const limit = 6; // or any default value
+    const response = await api.get('/', {
+      params: { page, limit }
+    });
     console.log('Réponse de l\'API :', response.data); // Affiche la réponse pour le débogage
     return true; // L'API répond correctement
   } catch (error) {
@@ -28,9 +32,11 @@ export const testApiConnection = async (): Promise<boolean> => {
   }
 };
 
-// 🔵 Récupérer tous les produits
-export const getProducts = async (): Promise<PaginatedResponse<Product>> => {
-  const response = await api.get('/');
+// 🔵 Récupérer tous les produits avec pagination
+export const getProducts = async (page: number, limit: number): Promise<PaginatedResponse<Product>> => {
+  const response = await api.get('/', {
+    params: { page, limit }
+  });
   return response.data; // La réponse est maintenant typée comme PaginatedResponse<Product>
 };
 
