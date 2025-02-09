@@ -8,55 +8,42 @@ import { Product, PaginatedResponse } from '@/types/product';
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1); // 🆕 Numéro de la page
+  const limit = 6; // 🆕 Nombre d’éléments par page
+  const [totalPages, setTotalPages] = useState(1); // 🆕 Total des pages
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        console.log('Début de la récupération des produits...');
         setLoading(true);
-
-        // Appel à l'API
-        const response: PaginatedResponse<Product> = await getProducts(); // Utilise le type PaginatedResponse
-        console.log('Données reçues depuis l\'API :', response);
-        console.log('Type de données reçues :', typeof response);
-
-        // Vérifier si "data" existe et est un tableau
+        const response: PaginatedResponse<Product> = await getProducts(page, limit);
+        
         if (response && Array.isArray(response.data)) {
-          const extractedProducts = response.data; // Extraire les produits du champ "data"
-          console.log('Nombre de produits extraits :', extractedProducts.length);
-          setProducts(extractedProducts);
-        } else {
-          console.error("La réponse de l'API ne contient pas de données valides.");
+          setProducts(response.data);
+          setTotalPages(Math.ceil(response.total / limit)); // 🆕 Calcul du nombre total de pages
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des produits:', error);
       } finally {
-        console.log('Fin du chargement...');
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, []);
-
-  console.log('État des produits avant le rendu :', products);
+  }, [page]); // 🆕 Dépendance pour recharger les produits quand la page change
 
   return (
     <div className="container mx-auto p-4">
-      {/* Titre de la page */}
       <h1 className="text-3xl font-title text-textPrimary mb-6">Nos Produits</h1>
 
-      {/* Affichage d'un message de chargement si nécessaire */}
       {loading ? (
         <p className="text-textSecondary">Chargement des produits...</p>
       ) : (
         <>
-          {/* Bloc "Top Produits" ou "Produits recommandés" */}
           {products.length > 0 && (
             <FeaturedProducts products={products} title="Top Produits" />
           )}
 
-          {/* Grille de tous les produits */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.length > 0 ? (
               products.map((product) => (
@@ -67,6 +54,27 @@ export default function ProductsPage() {
                 Aucun produit disponible.
               </p>
             )}
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-6 gap-4">
+            <button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+              className={`px-4 py-2 rounded ${page === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-secondary'}`}
+            >
+              Précédent
+            </button>
+            <span className="text-textPrimary font-semibold">
+              Page {page} / {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((prev) => (prev < totalPages ? prev + 1 : prev))}
+              disabled={page >= totalPages}
+              className={`px-4 py-2 rounded ${page >= totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-primary text-white hover:bg-secondary'}`}
+            >
+              Suivant
+            </button>
           </div>
         </>
       )}
