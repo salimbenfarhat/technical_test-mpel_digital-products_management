@@ -60,13 +60,12 @@ Assurez-vous que le backend tourne également sur http://localhost:3000/ pour qu
 - TypeScript (Typage strict et robuste)
 
 ## 📜 Structure du projet
-📁 mpel-pm/src/
-
-📂 components/ → Composants réutilisables (ex: ProductCard.tsx, Header.tsx, Footer.tsx)
-📂 app/ → Pages principales (/, /products, /products/[id], /products/[id]/edit)
-📂 utils/ → Fonctions utiles et API (api.ts)
-📂 types/ → Définition des interfaces TypeScript (product.ts)
-📜 globals.css → Styles globaux
+📁 mpel-pm/src/  
+📂 components/ → Composants réutilisables (ex: ProductCard.tsx, Header.tsx, Footer.tsx)  
+📂 app/ → Pages principales (/, /products, /products/[id], /products/[id]/edit)  
+📂 utils/ → Fonctions utiles et API (api.ts)  
+📂 types/ → Définition des interfaces TypeScript (product.ts)  
+📜 globals.css → Styles globaux  
 
 ## 🔧 Configuration
 Si besoin, vous pouvez modifier la configuration Tailwind ou Next.js dans :
